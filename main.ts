@@ -3,29 +3,17 @@ let probihazavod = false
 let probehnuto = false
 let casstartu = 0
 let caskonce = 0
-init()
-function init() {
-    let probihazavod = false
-    let probehnuto = false
-    let casstartu = 0
-    let caskonce = 0
-    basic.clearScreen()
-    on_button_pressed_a()
-}
-
 basic.forever(function on_forever() {
     
 })
 input.onLogoEvent(TouchButtonEvent.Touched, function on_logo_event_touched() {
     radio.sendNumber(0)
     music.playTone(Note.Bb, music.beat())
-    init()
+    control.reset()
 })
-function on_button_pressed_a() {
+input.onButtonPressed(Button.A, function on_button_pressed_a() {
     RunComp.SetLightLevel()
-}
-
-input.onButtonPressed(Button.A, on_button_pressed_a)
+})
 input.onButtonPressed(Button.B, function on_button_pressed_b() {
     if (probehnuto && !probihazavod) {
         basic.showNumber((caskonce - casstartu) / 1000)
@@ -36,7 +24,7 @@ radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
     
     if (receivedNumber == 0) {
         music.playTone(Note.Bb, music.beat())
-        init()
+        control.reset()
     }
     
     if (receivedNumber == 1) {

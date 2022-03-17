@@ -3,15 +3,6 @@ probihazavod = False
 probehnuto = False
 casstartu = 0
 caskonce = 0
-init()
-
-def init():
-    probihazavod = False
-    probehnuto = False
-    casstartu = 0
-    caskonce = 0
-    basic.clear_screen()
-    on_button_pressed_a()
 
 def on_forever():
     pass
@@ -20,7 +11,7 @@ basic.forever(on_forever)
 def on_logo_event_touched():
     radio.send_number(0)
     music.play_tone(Note.BB, music.beat())
-    init()
+    control.reset()
 input.on_logo_event(TouchButtonEvent.TOUCHED, on_logo_event_touched)
 
 def on_button_pressed_a():
@@ -36,7 +27,7 @@ def on_received_number(receivedNumber):
     global probihazavod, casstartu, caskonce
     if receivedNumber == 0:
         music.play_tone(Note.BB, music.beat())
-        init()
+        control.reset()
     if receivedNumber == 1:
         probihazavod = True
         casstartu = control.millis()
